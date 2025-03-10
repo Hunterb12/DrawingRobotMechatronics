@@ -7,7 +7,7 @@ import imageio.v2 as imageio
 from PIL import Image, ImageFilter
 import constants
 import argparse
-
+import sys
 
 class CircularRange:
 	def __init__(self, begin, end, value):
@@ -358,6 +358,7 @@ def parseArgs(namespace):
 		argParser.error("value for --threshold should be in range (0,255)")
 
 def main():
+	sys.setrecursionlimit(6000)
 	class Args: pass
 	parseArgs(Args)
 
