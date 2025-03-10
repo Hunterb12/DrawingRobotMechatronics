@@ -76,4 +76,8 @@ while True:
     cv2.destroyAllWindows()
 
     #Send to convert to GCode
-    subprocess.run(["python","image_to_gcode.py","--input", "img" + str(count-1) + ".jpg","--output", "graph.nc", "--threshold", "100"])
+    subprocess.run(["python","image_to_gcode.py","--input", "img" + str(count-1) + ".jpg","--output", "img" + str(count-1) + ".gcode", "--threshold", "100"])
+
+    #Add code to send to the STM32
+
+    done = False
