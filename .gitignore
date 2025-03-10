@@ -4,4 +4,4 @@ __pycache__/
 *.jpg
 *.dot
 *.nc
-!images/*
+!ImageToGCode/images/*

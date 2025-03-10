@@ -3,7 +3,7 @@
 
 import numpy as np
 from scipy import ndimage
-import imageio
+import imageio.v2 as imageio
 from PIL import Image, ImageFilter
 import constants
 import argparse
