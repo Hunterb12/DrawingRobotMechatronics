@@ -2,6 +2,7 @@ import subprocess
 import cv2
 import numpy as np
 from imutils.perspective import four_point_transform
+import serial
 
 cap = cv2.VideoCapture(1)
 
@@ -79,5 +80,31 @@ while True:
     subprocess.run(["python","image_to_gcode.py","--input", "img" + str(count-1) + ".jpg","--output", "img" + str(count-1) + ".gcode", "--threshold", "100"])
 
     #Add code to send to the STM32
+    GVec = []
+    XVec = []
+    YVec = []
+
+    ser = serial.Serial('COM3', 115200)
+
+    file = open('GATECHLOGO.nc', 'r')
+    read = file.readlines()
+
+    for line in read:
+        arr = str.split(line, " ")
+        G = int(arr[0].replace("G", ""))
+        X = int(arr[1].replace("X", ""))
+        Y = -int(arr[2].replace("Y", ""))
+
+        # GVec.append(G)
+        # XVec.append(X)
+        # YVec.append(Y)
+
+        ser.write(b"G" + G.to_bytes(1))
+        ser.write(b"X" + X.to_bytes(1))
+        ser.write(b"Y" + Y.to_bytes(1))
+
+    print("done")
+    ser.write(b"D")
+    ser.close()
 
     done = False
